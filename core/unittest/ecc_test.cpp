@@ -111,7 +111,11 @@ inline void hex2bin(const char *hex_string, const size_t size_string, uint8_t *o
   uint32_t buffer = 0;
   for (size_t i = 0; i < size_string / 2; i++)
   {
+#if defined(WIN32)
     sscanf_s(hex_string + 2 * i, "%2X", &buffer);
+#else
+    sscanf(hex_string + 2 * i, "%2X", &buffer);
+#endif
     out_bytes[i] = (uint8_t)buffer;
   }
 }
@@ -2259,7 +2263,7 @@ void TestAll()
 	 //TestTransaction();
   //   TestTransactionHW<HWWalletEmulator>();
   //   TestTxKernel();
-  //   TestTransactionHWSingular();
+    TestTransactionHWSingular();
 
 #if defined(BEAM_HW_WALLET)
     TestTransactionHW<TrezorWallet>();

@@ -75,7 +75,7 @@ namespace beam
                     m_trezor->init(enumerate);
                     //m_trezor->call_Ping("hello beam", true);
                 }
-                catch (std::runtime_error e)
+                catch (const std::runtime_error& e)
                 {
                     LOG_ERROR() << e.what();
                 }
@@ -221,7 +221,7 @@ namespace beam
                         result.m_P_Tag.m_pCondensed[1].m_Value = beam::Blob(rp.p_tag.condensed[1], 32);
                     }
 
-                    for (int c = 0; c < INNER_PRODUCT_N_CYCLES; c++)
+                    for (size_t c = 0; c < INNER_PRODUCT_N_CYCLES; c++)
                     {
                         for (int i = 0; i < 2; i++)
                         {
